@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+            home
+{% endblock title %}
+
+
+{% block content %}
+<h2>List of Job Vacancies by category</h2>
+
+{% for cat in cats %}
+<hr>
+<h1 style="color: skyblue;">{{cat.title}}</h1>
+{% for job in cat.job_set.all %}
+    <strong>{{job.vaccancy}}</strong>
+    <span style="color: red;"> | Posted: {{job.posted_on | timesince}} by {{job.company.capitalize}} Company </span> 
+    <p>{{job.description}}</p>
+    <h6>Available Positions: {{job.available}} | Category: <a href="">{{job.category}}</a></h6>
+{% endfor %}
+{% endfor %}
+    
+{% endblock content %}

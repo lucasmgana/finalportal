@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+        <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome.min.css' %}">
+    
+        <!-- bootstrap -->
+        <link href="{% static 'basicsdesigning/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+        <!-- material for bootstrap -->
+        <link rel="stylesheet" href="{% static 'finaldesignings/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'finaldesignings/css/mdb.min.css' %}">
+    
+        <!-- this page title -->
+        <title>
+            
+            {% block title %}
+                index
+            {% endblock title %}
+                
+        </title>
+    </head>
+
+    <a href="/">Home</a> | <a href="/categories/">Category</a> | <a href="/about/">About</a> | <a href="/contact-us/">Contact Us</a>
+    <hr>
+    <div class="container">
+
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+      
+    
+     <!-- SCRIPTS -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'finaldesignings/js/jquery-3.4.1.min.js' %}"></script>
+
+    <!-- Popper.js -->
+    <script type="text/javascript" src="{% static 'finaldesignings/js/popper.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'finaldesignings/js/bootstrap.min.js' %}"></script>
+
+    <!-- Material Design for Bootstrap -->
+    <script src="{% static 'xtradesigning/js/materialize.min.js' %}"></script>
+
+    <script>
+
+    $(document).ready(function()
+    {
+        $("body").click(function()
+        {
+            $("#mytext").hide();
+        });
+    });
+
+</script>
+
+
+</body>
+</html>
