@@ -181,7 +181,7 @@ class Job(models.Model):
     vaccancy = models.CharField(max_length=255)
     description = models.CharField(max_length=500)
     company = models.CharField(max_length=255)
-    posted_on = models.DateTimeField(auto_now_add=True, default=now())
+    posted_on = models.DateTimeField(auto_now_add=True)
     dadeline = models.DateField()
     available = models.PositiveIntegerField(default = 0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

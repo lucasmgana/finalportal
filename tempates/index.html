@@ -3,21 +3,56 @@
 {% load static %}
 
 
+{% block title %} home {% endblock title %}
 
-{% block title %}
-            home
-{% endblock title %}
+
 
 
 {% block content %}
-<h2>List of Job Vacancies</h2>
+
+
+<!-- viewing categorize jobs -->
+{% if cats %}
+<div class="mt-3">
+<h2 class="mt-5 text-info">{{cat}}</h2>
+    {% for cat in cats %}
+    <div class="card mb-3 col-md-6 p-4">
+    
+        <strong>{{cat.vaccancy}}</strong>
+        <span style="color: red;"> | Posted: {{cat.posted_on | timesince}} by {{cat.company.capitalize}} Company </span> 
+        <hr class="mt-2 mb-2">
+
+        <p>{{cat.description|truncatewords:20}}</p>
+        
+        <hr>
+        <p>Post(s): {{cat.available}} | <a href="{% url 'portalapp:singlejob' cat.id %}"> View Job</a></p>
+        
+    </div>
+    {% endfor %}
+</div>    
+<!-- end categorized jobs -->
+
+{% else %}
+<!-- viewing all jobs -->
+<div class="mt-3">
 
 {% for job in jobs %}
+<div class="card mb-3 col-md-6 p-4">
+    
     <strong>{{job.vaccancy}}</strong>
     <span style="color: red;"> | Posted: {{job.posted_on | timesince}} by {{job.company.capitalize}} Company </span> 
-    <p>{{job.description}}</p>
-    <h6>Available Positions: {{job.available}} | Category: <a href="/categories/">{{job.category}}</a></h6>
+    <hr class="mt-2 mb-2">
+
+    <p>{{job.description|truncatewords:20}}</p>
+    
+    <hr>
+    <p>Post(s): {{job.available}} | Category: <a href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a><a href="{% url 'portalapp:singlejob' job.id %}"> View Job</a></p>
+    
+</div>
 {% endfor %}
-    
-    
+</div>
+<!-- end all jobs -->
+
+{% endif %}
+
 {% endblock content %}
