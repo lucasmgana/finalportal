@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %} category {% endblock title %}
+
+
+
+{% block content %}
+
+
+{% for cat in cats %}
+<div class="mgana-account-page-right shadow-sm bg-white p-4 h-100">
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade  active show" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
+        <h3 class="font-weight-bold mt-0 mb-4 text-info">{{cat}}</h3>
+        <div class="row">
+        {% for job in cat.job_set.all %}
+        <div class="col-md-4 col-sm-6 mb-4 pb-2">
+            <div class="list-card bg-white h-100 rounded p-2 overflow-hidden position-relative shadow-lg">
+            
+                <div class="list-card-image">
+                    <div class="star position-absolute"><span class="badge badge-success"><i class="icofont-star"></i> 3.1 (300+)</span></div>
+                    <div class="favourite-heart text-danger position-absolute"><a href="#"><i class="icofont-heart"></i></a></div>
+                    <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
+                    <a href="#">
+                        <img src="img/list/4.png" class="img-fluid item-img">
+                    </a>
+                </div>
+                <div class="p-3 position-relative">
+                    <div class="list-card-body">
+                        <h6 class="mb-1"><a href="#" class="text-black">{{job.vaccancy}}</a>
+                    </h6>
+                        <p class="text-gray mb-3">Category: <a href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a></p>
+                        <small class="text-gray mb-3">Posted on: {{job.posted_on|timesince}} </a></small><br>
+                        <small class="text-gray mb-3">Deadline: {{job.dadeline}} </a></small>
+                        <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> Post(s): {{job.available}} </span> <span class="float-right text-black-50"> Tsh. 350 FOR TWO</span></p>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-info m-1" href="{% url 'portalapp:singlejob' job.id %}"> View Job</button>
+                        <button class="btn btn-sm btn-primary m-1" href="{% url 'portalapp:singlejob' job.id %}"> Save</button>
+                    </div>
+                </div>
+
+        </div>
+        </div>
+{% endfor %}
+
+</div>
+<hr class="my-0">
+</div>
+</div>
+</div>
+{% endfor %}
+
+
+{% endblock content %}

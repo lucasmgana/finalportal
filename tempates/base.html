@@ -12,12 +12,14 @@
         <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome.min.css' %}">
     
         <!-- bootstrap -->
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="{% static 'basicsdesigning/css/bootstrap.min.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
         <!-- material for bootstrap -->
         <link rel="stylesheet" href="{% static 'finaldesignings/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'finaldesignings/css/mdb.min.css' %}">
+        <link rel="stylesheet" href="{% static 'portalstyles/css/profile.css' %}">
     
         <!-- this page title -->
         <title>
@@ -28,11 +30,34 @@
                 
         </title>
     </head>
-  
-    {% include 'navbar.html' %}
+    
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <div class="profile-nav col-md-3">
+                
+                {% block profile-nav %}
+                    navigation area
+                {% endblock profile-nav %}
+                    
+            </div>
 
+            <div class="profile-info col-md-9">
+                <div class="panel">
+                    
+                    {% block content %}
+                        main area
+                    {% endblock content %}
+                        
+                </div>
+            </div>
+        </div>
+        </div>
+    
+    
     <div class="container">
-
+        <header class="banner">        
+            {% include 'included/navbar.html' %}
+        </header>
         {% block content %}
         
         {% endblock content %}
@@ -40,6 +65,11 @@
       
     
      <!-- SCRIPTS -->
+    <script src="{% static 'portalstyles/js/portalnavbar.js' %}"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
     <!-- jQuery -->
     <script type="text/javascript" src="{% static 'finaldesignings/js/jquery-3.4.1.min.js' %}"></script>
 
@@ -52,18 +82,9 @@
     <!-- Material Design for Bootstrap -->
     <script src="{% static 'xtradesigning/js/materialize.min.js' %}"></script>
 
-    <script>
-
-    $(document).ready(function()
-    {
-        $("body").click(function()
-        {
-            $("#mytext").hide();
-        });
-    });
-
 </script>
 
 
 </body>
 </html>
+

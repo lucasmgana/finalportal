@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} category {% endblock title %}
+
+
+{% block content %}
+
+
+<div class="row py-2">
+    <div class="col-md-4">
+            <div class="card mb-4 p-3">
+    
+    <strong>Vacancy: {{job.vaccancy}}</strong>
+    <hr class="mt-2 mb-2">
+
+    <span style="color: red;"> | Posted: {{job.posted_on | timesince}}</span> 
+   <p> Posted by {{job.company.capitalize}} </p>
+   <div class="mt-4">
+       
+<h5 class="text-muted">Descriptions</h5>
+    <p>{{job.description|truncatewords:20}}</p>
+    <p>Deadline: {{job.dadeline}} </p>
+
+</div>
+
+<p>Available Post(s): {{job.available}} </p>
+<hr>
+<div class="row">
+<a class="btn col btn-sm btn-info" href="{% url 'portalapp:catjobs' job.category %}">Apply Now</a><a class="btn col btn-sm btn-info" href="{% url 'portalapp:catjobs' job.category %}"> Add to wishlist</a>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,135 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} index page {% endblock title %}
+
+<!-- start block area -->
+{% block content %}
+
+
+<div class="row pt-4">
+    <div class="col-md-3 h-75">
+        <div class="mgana-account-page-left shadow-sm bg-white h-100">
+            <div class="border-bottom p-4">
+                <div class="mgana-user text-center">
+                    <div class="mgana-user-media">
+                        <img class="mb-3 rounded-pill shadow-sm mt-1" src="{{request.user.profile_image.url}}" alt="profile image">
+                        <div class="mgana-user-media-body">
+                            <h6 class="mb-2">{{request.user.full_name}}</h6>
+                            <p class="mb-1">+255(0)628 229 838</p>
+                            <p class="mb-1">{{request.user.role}}</p>                            
+                            <p>{{request.user.email}}</p>
+                            <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" data-toggle="modal" data-target="#edit-profile-modal" href="#"><i class="icofont-ui-edit"></i> EDIT PROFILE</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-tabs flex-column border-0 pt-4 pl-4 pb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false"><i class="icofont-heart"></i> Favorites</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+        <div class="col-md-9">
+
+            <div class="mgana-account-page-right shadow-sm bg-white p-4 h-100">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade  active show" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
+                        <h4 class="font-weight-bold mt-0 mb-4">Favorites</h4>
+                <!-- viewing categorize jobs -->
+                {% if cats %}
+
+                <h2 class="text-info">{{cat}}</h2>
+                <div class="row py-2">
+                    {% for cat in cats %}
+                    <div class="col-md-4 col-sm-6 mb-4 pb-2">
+                        <div class="list-card bg-white h-100 rounded p-2 overflow-hidden position-relative shadow-lg">
+                        
+                            <div class="list-card-image">
+                                <div class="star position-absolute"><span class="badge badge-success"><i class="icofont-star"></i> 3.1 (300+)</span></div>
+                                <div class="favourite-heart text-danger position-absolute"><a href="#"><i class="icofont-heart"></i></a></div>
+                                <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
+                                <a href="#">
+                                    <img src="img/list/4.png" class="img-fluid item-img">
+                                </a>
+                            </div>
+                            <div class="p-3 position-relative">
+                                <div class="list-card-body">
+                                    <h6 class="mb-1"><a href="#" class="text-black">{{cat.vaccancy}}</a>
+                                  </h6>
+                                    <p class="text-gray mb-3">Category: <a href="{% url 'portalapp:catjobs' cat.category %}">{{cat.category}}</a></p>
+                                    <small class="text-gray mb-3">Posted on: {{cat.posted_on|timesince}} </a></small><br>
+                                    <small class="text-gray mb-3">Deadline: {{cat.dadeline}} </a></small><br>
+                                    <small class="text-danger"><i class="icofont-wall-clock"></i> Available Post(s): {{cat.available}} </small>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-info m-1" href="{% url 'portalapp:singlejob' cat.id %}"> View Job</a>
+                                    <a class="btn btn-sm btn-primary m-1" href="{% url 'portalapp:savejob' cat.id %}"> Save</a>
+                                </div>
+                            </div>
+
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>    
+                <!-- end categorized jobs -->
+</div>
+</div>
+</div>
+                {% else %}
+                <!-- viewing all jobs -->
+                <div class="row">
+
+                    {% for job in jobs %}
+                    <div class="col-md-4 col-sm-6 mb-4 pb-2">
+                        <div class="list-card bg-white h-100 rounded p-2 overflow-hidden position-relative shadow-lg">
+                        
+                            <div class="list-card-image">
+                                <div class="star position-absolute"><span class="badge badge-success"><i class="icofont-star"></i> 3.1 (300+)</span></div>
+                                <div class="favourite-heart text-danger position-absolute"><a href="#"><i class="icofont-heart"></i></a></div>
+                                <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
+                                <a href="#">
+                                    <img src="img/list/4.png" class="img-fluid item-img">
+                                </a>
+                            </div>
+                            <div class="p-3 position-relative">
+                                <div class="list-card-body">
+                                    <h6 class="mb-1"><a href="#" class="text-black">{{job.vaccancy}}</a>
+                                  </h6>
+                                    <p class="text-gray mb-3">Category: <a href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a></p>
+                                    <small class="text-gray mb-3">Posted on: {{job.posted_on|timesince}} </a></small><br>
+                                    <small class="text-gray mb-3">Deadline: {{job.dadeline}} </a></small>
+                                    <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> Post(s): {{job.available}} </span> <span class="float-right text-black-50"> Tsh. 350 FOR TWO</span></p>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-info m-1" href="{% url 'portalapp:singlejob' job.id %}"> View Job</a>
+                                    <a class="btn btn-sm btn-primary m-1" href="{% url 'portalapp:savejob' job.id %}"> Save</a>
+                                </div>
+                            </div>
+
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+        <!-- end all jobs -->
+
+        {% endif %}
+        </div>
+</div>
+
+
+{% endblock content %}
+<strong>{{job.vaccancy}}</strong>
+                        <span style="color: red;"> | Posted: {{job.posted_on | timesince}} by {{job.company.capitalize}} Company </span> 
+                        <hr class="mt-2 mb-2">
+
+                        <p>{{job.description|truncatewords:20}}</p>
+                        
+                        <hr>
+                        <p>Post(s): {{job.available}} | Category: <a href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a>
+                            <a href="{% url 'portalapp:singlejob' job.id %}"> View Job</a></p>
+                        
