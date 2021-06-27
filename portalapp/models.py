@@ -17,7 +17,7 @@ class UserRole(models.Model):
 
 
 class Profile(models.Model):
-    role                = models.OneToOneField(UserRole, verbose_name= "user role", on_delete=models.CASCADE)
+    role                = models.ForeignKey(UserRole, verbose_name= "user role", on_delete=models.CASCADE)
     client              = models.OneToOneField(User, verbose_name= "profile owner", on_delete=models.CASCADE)
     profile_image       = models.ImageField(upload_to='media', max_length=None)
     full_name           = models.CharField(verbose_name='Full Name', default="", blank= False, null= False, name="first_name", max_length=255)
@@ -72,6 +72,11 @@ class Category(models.Model):
     
     def get_absolute_url(self):
         return reverse('index')
+    
+    
+    def __init__(self, *args, **kwargs):
+        super(Category, self).__init__(*args, **kwargs)
+    
 
         
 class Job(models.Model):
@@ -86,7 +91,8 @@ class Job(models.Model):
     def __str__(self):
         return self.vaccancy
     
-    def get_absolute_url(self):        
+    def get_absolute_url(self):    
+        # should return url to redirect to recreiter site
         return reverse('index')
 
 

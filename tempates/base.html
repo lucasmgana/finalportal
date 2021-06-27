@@ -14,56 +14,59 @@
         <!-- bootstrap -->
         <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="{% static 'basicsdesigning/css/bootstrap.min.css' %}" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        
         <!-- material for bootstrap -->
         <link rel="stylesheet" href="{% static 'finaldesignings/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'finaldesignings/css/mdb.min.css' %}">
         <link rel="stylesheet" href="{% static 'portalstyles/css/profile.css' %}">
-    
+        <link rel="stylesheet" href="{% static 'portalstyles/css/edit_profile.css' %}">
+        
         <!-- this page title -->
         <title>
             
             {% block title %}
-                index
+            index
             {% endblock title %}
-                
+            
         </title>
     </head>
-    
-    <div class="container bootstrap snippets bootdey">
-        <div class="row">
-            <div class="profile-nav col-md-3">
+    <body>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <div class="container">       
+        {% include 'included/navbar.html' %}
+        
+        <div class="row pt-4">
                 
-                {% block profile-nav %}
-                    navigation area
-                {% endblock profile-nav %}
-                    
-            </div>
+                {% if request.user.is_authenticated %}
+                    {% include 'included/sidenav.html' %}
+                    <div class="col-md-9">
+                {% else %}
+                <div class="col-md-12">
+                
+                {% endif %}
+                <div class="mgana-account-page-right shadow-sm bg-white p-4 h-100">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade  active show" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
+                            <div class="row">
+                                <div class="col">
+                {% include 'included/breadcrumb.html' %} 
+                                </div>
+                                <div class="col">
+                                    {% block searchbar %}
 
-            <div class="profile-info col-md-9">
-                <div class="panel">
-                    
-                    {% block content %}
-                        main area
-                    {% endblock content %}
-                        
-                </div>
-            </div>
-        </div>
-        </div>
-    
-    
-    <div class="container">
-        <header class="banner">        
-            {% include 'included/navbar.html' %}
-        </header>
+                                    {% endblock searchbar %}                                      
+                                </div>
+                            </div>
+
         {% block content %}
         
         {% endblock content %}
     </div>
-      
-    
+    </div>
+</div>
+</div>
      <!-- SCRIPTS -->
     <script src="{% static 'portalstyles/js/portalnavbar.js' %}"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -81,9 +84,6 @@
 
     <!-- Material Design for Bootstrap -->
     <script src="{% static 'xtradesigning/js/materialize.min.js' %}"></script>
-
-</script>
-
 
 </body>
 </html>

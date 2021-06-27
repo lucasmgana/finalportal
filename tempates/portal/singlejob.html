@@ -7,13 +7,15 @@
 
 
 <div class="row py-2">
-    <div class="col-md-4">
+    <div class="col-md">
             <div class="card mb-4 p-3">
     
-    <strong>Vacancy: {{job.vaccancy}}</strong>
-    <hr class="mt-2 mb-2">
+    <div class="list-card-image">
+        <div class="star float-right"><span class="badge badge-success"><i class="icofont-star"></i> saves 5k</span></div>
+        <strong>Vacancy: {{job.vaccancy}}</strong>
+    </div><hr class="mt-2 mb-2">
 
-    <span style="color: red;"> | Posted: {{job.posted_on | timesince}}</span> 
+    <span style="color: red;"> | Posted: {{job.posted_on | timesince}}</span>  
    <p> Posted by {{job.company.capitalize}} </p>
    <div class="mt-4">
        
@@ -25,8 +27,14 @@
 
 <p>Available Post(s): {{job.available}} </p>
 <hr>
-<div class="row">
-<a class="btn col btn-sm btn-info" href="{% url 'portalapp:catjobs' job.category %}">Apply Now</a><a class="btn col btn-sm btn-info" href="{% url 'portalapp:catjobs' job.category %}"> Add to wishlist</a>
+<div class="btn-group m-auto">
+    
+    {% if request.user.is_authenticated %}
+    <a class="btn btn-sm rounded btn-info m-1" href="{% url 'portalapp:catjobs' job.category %}">Apply Now</a>
+    {% else %}        
+    <a class="btn btn-sm rounded btn-danger m-1" href="{% url 'login' %}">Login to Apply</a>
+    {% endif %}
+<a class="btn btn-sm rounded btn-primary m-1" href="{% url 'portalapp:catjobs' job.category %}"> save job</a>
 </div>
 </div>
 </div>

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Login {% endblock title %}
+
+
+
+
+{% block content %}
+<div class="row mt-3">
+<div class="col-md-4">
+                    <!-- cards -->
+                <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+                    
+                    
+                    <div class="list-card-image">
+                        
+                        <div class="p-3 position-relative">
+                                        <h2 class="mt-0 mb-4">Register Account</h2>
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <form action="" method="post">
+                                        
+                                            {% csrf_token %}
+                                            
+                                            {% for non_field_error in form.non_field.errors %}
+                                            <p class="help is-danger">{{non_field_error}}</p> 
+                                            {% endfor %}
+                                            {% for field in form %}
+                                            <div class="form-group p-1">
+                                                
+                                            <label for="{{ field.name }}" class="label text-info">{{field.html_name}}</label>
+                                            
+                                            {{field}}
+                                            
+                                            
+                                            {% if field.errors %}
+                                                    {% for error in field.errors %}
+                                                    <p class="text-danger">{{error}}</p>           
+                                                    {% endfor %}
+                                                        
+                                            {% endif %}
+                                        </div>
+                                                    
+                                            {% endfor %}
+                                        <button class="btn btn-sm btn-info">Register</button><span class="text-info float-right"> Do you have an account? <a href="{% url 'login' %}">Login</a></span>
+                                        
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- end card -->                   
+</div>
+
+
+    <div class="col-md-8">
+        <div class="mgana-account-page-left shadow-sm bg-white h-100">
+            <div class="border-bottom p-4">
+                <h2>Field Instructions</h2>
+                 
+                    {% for field in form %}
+                    
+                    {% if field.help_text %}                            
+                    <span>{{field.html_name}}</span>
+                        <p>{{field.help_text}}</p>
+                    {% endif %}
+                    {% endfor %}
+                        
+            </div>
+            <ul class="nav nav-tabs flex-column border-0 pt-4 pl-4 pb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false"><i class="icofont-heart"></i> Explore Jobs</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock content %}

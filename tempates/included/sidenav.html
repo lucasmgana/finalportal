@@ -1,0 +1,28 @@
+<div class="col-md-3 h-75">
+    <div class="mgana-account-page-left shadow-sm bg-white h-100">
+        <div class="border-bottom p-4">
+            <div class="mgana-user text-center">
+                <div class="mgana-user-media">
+                    <img class="mb-3 rounded-pill shadow-sm mt-1" src="{{request.user.profile.profile_image.url}}" alt="profile image">
+                    <div class="mgana-user-media-body">
+                        <h6 class="mb-2">{{request.user.username}}</h6>
+                        <p class="mb-1">{{request.user.profile.phone}}</p>
+                        <p class="mb-1">{{request.user.profile.role}}</p>                            
+                        <p>{{request.user.email}}</p>
+                        <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" href="#">
+                            <i class="icofont-ui-edit"></i> Dashboard</a></p>
+                        <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" href="{% url 'clients:editprofile' %}">
+                            <i class="icofont-ui-edit"></i> Edit Profile</a></p>
+                        <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" href="#">
+                                    <i class="icofont-ui-edit"></i> Calender </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="nav nav-tabs flex-column border-0 pt-4 pl-4 pb-4" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false"><i class="icofont-heart"></i> Favorites</a>
+            </li>
+        </ul>
+    </div>
+</div>
