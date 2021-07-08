@@ -48,6 +48,9 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = 'Cities'
+
 
 class Address(models.Model):
     address_user        = models.ForeignKey(User, verbose_name= "Client | company", on_delete=models.CASCADE)
@@ -58,6 +61,8 @@ class Address(models.Model):
         return str(self.address_user) + ", " + self.post_code + ", " + str(self.city)
 
 
+    class Meta:
+        verbose_name_plural = 'Address'
 
 
 
@@ -67,6 +72,10 @@ class Address(models.Model):
 class Category(models.Model):
     title               = models.CharField(max_length=255)
 
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+    
     def __str__(self):
         return self.title
     
@@ -76,7 +85,9 @@ class Category(models.Model):
     
     def __init__(self, *args, **kwargs):
         super(Category, self).__init__(*args, **kwargs)
+
     
+
 
         
 class Job(models.Model):
@@ -121,6 +132,10 @@ class ApplicationStatus(models.Model):
 
     def __str__(self):
         return self.status_name
+
+    class Meta:
+        verbose_name_plural = 'ApplicationStatuses'
+    
 
 
 class JobApplication(models.Model):
