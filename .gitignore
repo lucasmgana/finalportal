@@ -1,1 +1,8 @@
 db.sqlite3
+jobapplication/
+templates/jobapplication/
+media/products/
+clients/
+__pycatch__/
+README.md
+requ.txt
