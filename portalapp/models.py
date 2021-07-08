@@ -141,3 +141,5 @@ class Comment(models.Model):
     def __str__(self):
         return " commented on:" + str(self.job_commented)
 
+
+

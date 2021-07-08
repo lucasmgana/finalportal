@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, get_list_or_404
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django.urls.base import reverse_lazy
+from django.urls.base import reverse_lazy, reverse, resolve
 from django.views import generic
 from .models import *
 from .forms import *
@@ -9,9 +9,15 @@ import json
 
 import json  
 from datetime import date, datetime
-  
+# from urllib.parse import urlparse
+from django.urls import resolve
+# from django.http import Http404, HttpResponseRedirect
 
+# def page_url(request):
+#     next = request.META.get('HTTP_REFERER', None) or '/'
 
+#     match = resolve(next)
+#     return match.url_name
 
 class DateEncoder(json.JSONEncoder):  
     def default(self, obj):  
@@ -30,12 +36,28 @@ class IndexView(generic.TemplateView):
     template_name               = 'portal/index.html'
     ordering                    = ['available']
 
-    def get_context_data(sel, **kwargs):
+    def get_context_data(self, **kwargs):
         context                 = super().get_context_data(**kwargs)
         context['jobs']         = Job.objects.all()
         context["cat_title"]    = Category
         context['qs_json']      = json.dumps(list(Job.objects.values()), cls=DateEncoder)
+
+        context['page_title'] = self.request
         return context
+    
+# def myview(request):
+#     next = request.META.get('HTTP_REFERER', None) or '/'
+#     response = HttpResponseRedirect(next)
+#     # modify the request and response as required, e.g. change locale
+#     # and set corresponding locale cookie
+#     view, args, kwargs = resolve(urlparse(next)[2])
+#     kwargs['request'] = request
+#     print(str(view) + ' ' + str(args) + ' ' + str(kwargs))
+#     try:
+#         view(*args, **kwargs)
+#     except Http404:
+#         return HttpResponseRedirect('/')
+#     return response
 
 
 class CategoryView(generic.TemplateView):

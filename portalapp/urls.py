@@ -12,4 +12,7 @@ urlpatterns = [
     path('single-job/<int:pk>/', SingleJob.as_view(), name = 'singlejob'),
     path('wishlist/', Wishlist.as_view(), name = 'wishlist'),
     path('savejob-<int:pk>/', SaveJob.as_view(), name = 'savejob'),
+
+    # path('myview/', myview, name = 'myview'),
+    
 ]
