@@ -1,8 +1,19 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
 db.sqlite3
-jobapplication/
-templates/jobapplication/
-media/products/
-clients/
-__pycatch__/
+media
 README.md
 requ.txt
+
+
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
