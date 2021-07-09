@@ -1,30 +1,42 @@
-<div class="col-md-3 h-75">
-    <div class="mgana-account-page-left shadow-sm bg-white h-100">
-        <div class="border-bottom p-4">
-            <div class="mgana-user text-center">
-                <div class="mgana-user-media">
 
-                    <img class="mb-3 rounded-pill shadow-sm mt-1" src="{{request.user.profile.profile_image.url}}" alt="profile image">
-                    
-                    <div class="mgana-user-media-body">
-                        <h6 class="mb-2">{{request.user.username}}</h6>
-                        <p class="mb-1">{{request.user.profile.phone}}</p>
-                        <p class="mb-1">{{request.user.profile.role}}</p>                            
-                        <p>{{request.user.email}}</p>
-                        <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" href="#">
-                            <i class="icofont-ui-edit"></i> Dashboard</a></p>
-                        <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" href="{% url 'clients:editprofile' %}">
-                            <i class="icofont-ui-edit"></i> Edit Profile</a></p>
-                        <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" href="#">
-                                    <i class="icofont-ui-edit"></i> Calender </a></p>
-                    </div>
-                </div>
-            </div>
+<div id="desk" class="profile-nav col-md-3">
+    <div class="panel">
+        <div class="user-heading round bg-info">
+            <a>
+                <img src="
+                
+                {% if request.user.profile.profile_image %}
+                {{request.user.profile.profile_image.url}}
+                {% else %}
+                https://bootdey.com/img/Content/avatar/avatar3.png
+                {% endif %}
+                
+                " alt="">
+            </a>
+            <h1 class="mt-4 text-white" style="font-weight: bold;">{{request.user.username.capitalize}}</h1>
+            <span class="text-white-75">{{request.user.email}}</span>
         </div>
-        <ul class="nav nav-tabs flex-column border-0 pt-4 pl-4 pb-4" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false"><i class="icofont-heart"></i> Favorites</a>
+
+        <ul class="nav nav-vertical nav-stacked bg-secondary rounded-bottom mt-0 px-3 py-2">
+            <nav class="nav flex-column">
+            <li><a class="nav-link text-white" class="nav-link text-white" href="{% url 'portalapp:profile' request.user.id %}"> <i class="fa fa-user  text-white mr-2" ></i> Profile</a></li>
+               
+            <li><a class="nav-link text-white" href="#"> <i class="icofont-prescription  text-white mr-2" ></i> Saved job(s) <span class="badge badge-danger">9</span></a></li>
+               
+                
+            <li>
+                <a class="nav-link text-white" href="#"> <i class="fa fa-calendar-alt text-white mr-2" ></i> My Calender</a>
             </li>
-        </ul>
+            <li>
+                <a class="nav-link text-white" href="#"> <i class="fa fa-tasks  text-white mr-2" ></i> My applications</a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#"> <i class="fa fa-file-alt  text-white mr-2" ></i> Update resumes</a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="#"> <i class="fa fa-edit  text-white mr-2" ></i> Edit profile</a>
+            </li>
+        </nav>
+    </ul>
     </div>
 </div>

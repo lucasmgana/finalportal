@@ -2,8 +2,8 @@
 *.log
 *.pot
 *.pyc
-__pycache__/
-jopapplication/
+*__pycache__/
+*jopapplication/
 db.sqlite3
 media/
 README.md

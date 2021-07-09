@@ -32,10 +32,10 @@ class Profile(models.Model):
 
 class Resume(models.Model):
     seeker              = models.OneToOneField(Profile, verbose_name= "Seeker", on_delete=models.CASCADE)
-    cv_attachment                  =  models.CharField(max_length=50)
-    education_level           =  models.CharField(max_length=50)
+    cv_attachment       =  models.CharField(max_length=50)
+    education_level     =  models.CharField(max_length=50)
     certificates        =  models.CharField(max_length=50)
-    hire_status              =  models.CharField(max_length=50)
+    hire_status         =  models.CharField(max_length=50)
 
     def __str__(self):
         return str(self.seeker) + " the seeker"
@@ -139,8 +139,8 @@ class ApplicationStatus(models.Model):
 
 
 class JobApplication(models.Model):
-    seeker              = models.OneToOneField(User, verbose_name= "seeker", on_delete=models.CASCADE)
-    job                 = models.OneToOneField(Job, verbose_name= "Job applied", on_delete=models.CASCADE)
+    seeker              = models.ForeignKey(User, verbose_name= "seeker", on_delete=models.CASCADE)
+    job                 = models.ForeignKey(Job, verbose_name= "Job applied", on_delete=models.CASCADE)
     status              = models.OneToOneField(ApplicationStatus, verbose_name= "application status", on_delete=models.CASCADE)
     Apply_at            = models.DateTimeField(auto_now=False, auto_now_add=False)
 

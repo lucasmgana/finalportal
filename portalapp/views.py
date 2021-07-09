@@ -1,3 +1,7 @@
+from typing import Counter
+
+from django.db.models.aggregates import Count
+from jobapplication.models import Order
 from django.shortcuts import get_object_or_404, render, get_list_or_404
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.urls.base import reverse_lazy, reverse, resolve
@@ -9,13 +13,12 @@ import json
 
 import json  
 from datetime import date, datetime
-# from urllib.parse import urlparse
 from django.urls import resolve
-# from django.http import Http404, HttpResponseRedirect
 
+# from urllib.parse import urlparse
+# from django.http import Http404, HttpResponseRedirect
 # def page_url(request):
 #     next = request.META.get('HTTP_REFERER', None) or '/'
-
 #     match = resolve(next)
 #     return match.url_name
 
@@ -42,7 +45,7 @@ class IndexView(generic.TemplateView):
         context["cat_title"]    = Category
         context['qs_json']      = json.dumps(list(Job.objects.values()), cls=DateEncoder)
 
-        context['page_title'] = self.request
+        context['page_title']   = ""
         return context
     
 # def myview(request):
@@ -62,13 +65,15 @@ class IndexView(generic.TemplateView):
 
 class CategoryView(generic.TemplateView):
     template_name               = 'portal/category.html'
-    ordering_by                 = ['-id']
-
 
 
     def get_context_data(self, **kwargs):
         context                 = super().get_context_data(**kwargs)
-        context['cats']         = get_list_or_404(Category)
+        context['page_title']   = "Categories"
+        
+        context['cats']         = Category.objects.all().annotate(
+            job_s = Count('job')).order_by('-job_s')
+
         return context
 
 
@@ -77,10 +82,14 @@ class SpecificCategory(generic.TemplateView):
     template_name = 'portal/index.html'
 
     def get_context_data(self, **kwargs):
-        context                 = super().get_context_data(**kwargs)
-        context['cat']          = get_object_or_404(Category, title=kwargs['cat'])
-        context['jobs']         = get_list_or_404(Job, category=context['cat'])
-        print('all done')
+        context                     = super().get_context_data(**kwargs)
+        try:
+            context['cat']          = get_object_or_404(Category, title=kwargs['cat'])
+            context['jobs']         = get_list_or_404(Job, category=context['cat'])
+            context['page_title']   = "Category / " + str(context['cat'])
+
+        except:
+            pass
         return context
 
 
@@ -90,22 +99,10 @@ class SingleJob(generic.DetailView):
     context_object_name         = 'job'
     
 
-class Wishlist(generic.TemplateView):
-    template_name               = 'portal/wishlist.html'
-    
 
-
-class Feedback(generic.TemplateView):
-    template_name               = 'portal/feedback.html'
-
-    def get_context_data(self, **kwargs):
-        context                 = super().get_context_data(**kwargs)
-        context["cat_title"]    = 'category'
-        return context
-    
 
 class SaveJob(generic.TemplateView):
-    template_name = 'clients/user_profile_bio_graph_and_total_sales.html'
+    template_name = 'clients/profile.html'
 
 
     def get_context_data(self, **kwargs):
@@ -129,3 +126,40 @@ class SaveJob(generic.TemplateView):
         # add job on wishlist
         return context
 
+
+
+class ApplicationView(generic.TemplateView):
+    template_name               = 'portal/application.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context[""] = ''
+        return context
+    
+
+
+
+
+
+class Wishlist(generic.TemplateView):
+    template_name               = 'portal/wishlist.html'
+    
+
+
+class Feedback(generic.TemplateView):
+    template_name               = 'portal/feedback.html'
+
+    def get_context_data(self, **kwargs):
+        context                 = super().get_context_data(**kwargs)
+        context["cat_title"]    = 'category'
+        return context
+    
+
+
+class ProfileView(generic.TemplateView):
+    template_name               = 'clients/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context                 = super().get_context_data(**kwargs)
+        context["profile"]      = Profile.objects.get(client=self.kwargs['pk'])
+        return context
+    

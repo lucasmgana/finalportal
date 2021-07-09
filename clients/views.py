@@ -7,7 +7,7 @@ from django.contrib.auth.views import PasswordChangeView
 
 
 class ProfileView(generic.TemplateView):
-    template_name = 'clients/userprofile.html'
+    template_name = 'clients/profile.html'
 
 
 
@@ -15,6 +15,10 @@ class UserRegisterView(generic.CreateView):
     form_class = UserRegisterForm
     template_name = 'registration/registration.html'
     success_url = reverse_lazy('portalapp:index')
+
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        return super().post(request, *args, **kwargs)
 
 class UserEditProfile(generic.UpdateView):
     template_name = 'clients/Edit_profile_page.html'

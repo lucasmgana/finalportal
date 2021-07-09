@@ -10,17 +10,20 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
         <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bstyles/icofont/icofont.min.css' %}">
     
         <!-- bootstrap -->
         <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="{% static 'basicsdesigning/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'bstyles/css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         
         <!-- material for bootstrap -->
-        <link rel="stylesheet" href="{% static 'finaldesignings/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'finaldesignings/css/mdb.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bstyles/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'portalstyles/css/sidenav.css' %}">
+        
         <link rel="stylesheet" href="{% static 'portalstyles/css/profile.css' %}">
         <link rel="stylesheet" href="{% static 'portalstyles/css/edit_profile.css' %}">
+        <link rel="stylesheet" href="{% static 'portalstyles/css/myprofile.css' %}">
         
         <!-- this page title -->
         <title>
@@ -34,7 +37,7 @@
     <body>
         
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-    <div class="container">       
+    <div class="container" style="margin-top: 0em;">       
         {% include 'included/navbar.html' %}
         
         <div class="row pt-4">
@@ -68,22 +71,19 @@
 </div>
 </div>
      <!-- SCRIPTS -->
-    <script src="{% static 'portalstyles/js/portalnavbar.js' %}"></script>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+     
+     
+     <!-- jQuery -->
+     <script type="text/javascript" src="{% static 'bstyles/js/jquery-3.4.1.min.js' %}"></script>
+     
+     <script src="{% static 'portalstyles/js/portalnavbar.js' %}"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-    <!-- jQuery -->
-    <script type="text/javascript" src="{% static 'finaldesignings/js/jquery-3.4.1.min.js' %}"></script>
-
     <!-- Popper.js -->
-    <script type="text/javascript" src="{% static 'finaldesignings/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bstyles/js/popper.min.js' %}"></script>
 
     <!-- Bootstrap -->
-    <script type="text/javascript" src="{% static 'finaldesignings/js/bootstrap.min.js' %}"></script>
-
-    <!-- Material Design for Bootstrap -->
-    <script src="{% static 'xtradesigning/js/materialize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bstyles/js/bootstrap.min.js' %}"></script>
 
 </body>
 </html>

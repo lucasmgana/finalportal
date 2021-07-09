@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="row text-primary py-2">
+<div class="row py-2">
     <div class="col-md">
             <div class="card mb-4 p-3">
     
@@ -29,11 +29,11 @@
 <div class="btn-group m-auto">
     
     {% if request.user.is_authenticated %}
-    <a class="btn btn-md rounded btn-info m-1" href="{% url 'portalapp:applying' job.id %}">Apply Now</a>
+    <a class="btn btn-sm rounded btn-info m-1" href="{% url 'portalapp:catjobs' job.category %}">Apply Now</a>
     {% else %}        
-    <a class="btn btn-md rounded btn-danger m-1" href="{% url 'login' %}">Login to Apply</a>
+    <a class="btn btn-sm rounded btn-danger m-1" href="{% url 'login' %}">Login to Apply</a>
     {% endif %}
-<a class="btn btn-md rounded btn-primary m-1" href="{% url 'portalapp:catjobs' job.category %}"> save job</a>
+<a class="btn btn-sm rounded btn-primary m-1" href="{% url 'portalapp:catjobs' job.category %}"> save job</a>
 </div>
 </div>
 </div>

@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} index page {% endblock title %}
+
+
+{% block searchbar %}
+{% include 'included/search.html' %}
+{% endblock searchbar %}
+
+
+<!-- start block area -->
+{% block content %}
+
+<hr>
+<h2 class="text-info my-4">{{cat}}</h2>
+    <!-- viewing categorize jobs -->  
+                <!-- viewing all jobs -->
+                <div class="row">
+                    
+                    {% for job in jobs %}
+                    <div class="col-md-4 col-sm-6 mb-4 pb-2">
+                        <div class="list-card bg-white h-100 rounded p-2 overflow-hidden position-relative shadow-lg">
+                        
+                            <div class="list-card-image">
+                                <div class="member-plan position-absolute"><span class="badge badge-success"><a class="text-white m-2" href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a></span></div>
+                                <a href="#">
+                                    <img src="img/list/4.png" class="img-fluid item-img">
+                                </a>
+                            </div>
+                            <div class="p-3 position-relative">
+                                <div class="list-card-body">
+                                    <h6 class="mb-1"><a href="#" class="text-black">{{job.vaccancy}}</a>
+                                  </h6>
+                                    <small class="text-gray mb-3">Posted on: {{job.posted_on|timesince}} </a></small><br>
+                                    <small class="text-gray mb-3">Deadline: {{job.dadeline}} </a></small>
+                                    <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> Post(s): {{job.available}} </span></p>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-info m-1" href="{% url 'portalapp:singlejob' job.id %}"> View Job</a>
+                                    <a class="btn btn-sm btn-primary m-1" href="{% url 'portalapp:savejob' job.id %}"> Save</a>
+                                </div>
+                            </div>
+
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>    
+                <!-- end categorized jobs -->
+</div>
+</div>
+</div>
+{% endblock content %}
