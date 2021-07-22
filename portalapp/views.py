@@ -36,7 +36,7 @@ class DateEncoder(json.JSONEncoder):
 
 class IndexView(generic.TemplateView):
     models                      = Job
-    template_name               = 'portal/index.html'
+    template_name               = 'portal/landingpage.html'
     ordering                    = ['available']
 
     def get_context_data(self, **kwargs):
@@ -47,20 +47,6 @@ class IndexView(generic.TemplateView):
 
         context['page_title']   = ""
         return context
-    
-# def myview(request):
-#     next = request.META.get('HTTP_REFERER', None) or '/'
-#     response = HttpResponseRedirect(next)
-#     # modify the request and response as required, e.g. change locale
-#     # and set corresponding locale cookie
-#     view, args, kwargs = resolve(urlparse(next)[2])
-#     kwargs['request'] = request
-#     print(str(view) + ' ' + str(args) + ' ' + str(kwargs))
-#     try:
-#         view(*args, **kwargs)
-#     except Http404:
-#         return HttpResponseRedirect('/')
-#     return response
 
 
 class CategoryView(generic.TemplateView):
@@ -97,6 +83,13 @@ class SingleJob(generic.DetailView):
     template_name               = 'portal/singlejob.html'
     model                       = Job
     context_object_name         = 'job'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title']   = str(Job.objects.get(id=self.kwargs['pk']))
+        return context
+    
     
 
 
@@ -132,7 +125,9 @@ class ApplicationView(generic.TemplateView):
     template_name               = 'portal/application.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context[""] = ''
+        next = self.request.GET.get('next')
+        context['page_title']   = "Application"
+        print(next)
         return context
     
 
@@ -150,6 +145,7 @@ class Feedback(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context                 = super().get_context_data(**kwargs)
+        context['page_title']   = "Feedback"
         context["cat_title"]    = 'category'
         return context
     
@@ -160,6 +156,7 @@ class ProfileView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context                 = super().get_context_data(**kwargs)
+        context['page_title']   = "Profile"
         context["profile"]      = Profile.objects.get(client=self.kwargs['pk'])
         return context
     

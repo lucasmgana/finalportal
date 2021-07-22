@@ -19,22 +19,22 @@
 
         <ul class="nav nav-vertical nav-stacked bg-secondary rounded-bottom mt-0 px-3 py-2">
             <nav class="nav flex-column">
-            <li><a class="nav-link text-white" class="nav-link text-white" href="{% url 'portalapp:profile' request.user.id %}"> <i class="fa fa-user  text-white mr-2" ></i> Profile</a></li>
+            <li><a class="nav-link text-white" class="nav-link text-white" href="{% url 'clients:profile' request.user.id %}"> <i class="icofont-ui-user text-white mr-2" ></i> Profile</a></li>
                
             <li><a class="nav-link text-white" href="#"> <i class="icofont-prescription  text-white mr-2" ></i> Saved job(s) <span class="badge badge-danger">9</span></a></li>
                
                 
             <li>
-                <a class="nav-link text-white" href="#"> <i class="fa fa-calendar-alt text-white mr-2" ></i> My Calender</a>
+                <a class="nav-link text-white" href="#"> <i class="icofont-ui-calendar text-white mr-2" ></i> My Calender</a>
             </li>
             <li>
-                <a class="nav-link text-white" href="#"> <i class="fa fa-tasks  text-white mr-2" ></i> My applications</a>
+                <a class="nav-link text-white" href="#"> <i class="icofont-ui-office  text-white mr-2" ></i> My applications</a>
             </li>
             <li>
-                <a class="nav-link text-white" href="#"> <i class="fa fa-file-alt  text-white mr-2" ></i> Update resumes</a>
+                <a class="nav-link text-white" href="#"> <i class="icofont-ui-file  text-white mr-2" ></i> Update resumes</a>
             </li>
             <li>
-                <a class="nav-link text-white" href="#"> <i class="fa fa-edit  text-white mr-2" ></i> Edit profile</a>
+                <a class="nav-link text-white" class="nav-link text-white" href="{% url 'clients:editprofile' %}"> <i class="icofont-ui-edit  text-white mr-2" ></i> Edit profile</a>
             </li>
         </nav>
     </ul>

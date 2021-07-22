@@ -15,7 +15,7 @@
 {% block content %}
 
 <hr>
-<h2 class="text-info my-4">{{cat}}</h2>
+
     <!-- viewing categorize jobs -->  
                 <!-- viewing all jobs -->
                 <div class="row">
@@ -24,16 +24,22 @@
                     <div class="col-md-4 col-sm-6 mb-4 pb-2">
                         <div class="list-card bg-white h-100 rounded p-2 overflow-hidden position-relative shadow-lg">
                         
-                            <div class="list-card-image">
-                                <div class="member-plan position-absolute"><span class="badge badge-success"><a class="text-white m-2" href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a></span></div>
-                                <a href="#">
-                                    <img src="img/list/4.png" class="img-fluid item-img">
-                                </a>
-                            </div>
+                           
+                           {% if cat %}
+                           {{empty}}
+                           {% else %}
+                           <div class="list-card-image"  style="opacity: 0.7;">
+                            <div class="member-plan p-1"><span class="btn btn-sm btn-outline-info"><a class="text-primary m-2" href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a></span></div>
+                            <a href="#">
+                            </a>
+                        </div>
+
+                           {% endif %}
+                               
                             <div class="p-3 position-relative">
                                 <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="#" class="text-black">{{job.vaccancy}}</a>
-                                  </h6>
+                                    <p style="font-size: 18px;" class="mb-1 text-danger">{{job.vaccancy}}
+                                  </p>
                                     <small class="text-gray mb-3">Posted on: {{job.posted_on|timesince}} </a></small><br>
                                     <small class="text-gray mb-3">Deadline: {{job.dadeline}} </a></small>
                                     <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> Post(s): {{job.available}} </span></p>

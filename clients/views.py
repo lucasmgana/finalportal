@@ -17,16 +17,13 @@ class UserRegisterView(generic.CreateView):
     success_url = reverse_lazy('portalapp:index')
 
 
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        return super().post(request, *args, **kwargs)
-
 class UserEditProfile(generic.UpdateView):
-    template_name = 'clients/Edit_profile_page.html'
-    form_class = UserEditProfileForm
+    template_name = 'clients/Edit_profile.html'
+    form_class = UserRegisterForm
     success_url = reverse_lazy('portalapp:profile')
 
     
-    def get_object(self):
+    def get_object(self): 
         return self.request.user
 
 

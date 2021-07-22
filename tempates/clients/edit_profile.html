@@ -5,7 +5,7 @@
 
 
 {% block searchbar %}
-{% include 'included/search.html' %}
+your need to upgrade ur resumes
 {% endblock searchbar %}
 
 {% block content %}
@@ -20,10 +20,10 @@
               <h1>Bio Graph</h1>
               <div class="row">
                   <div class="bio-row">
-                      <p><span>Full Name </span>: {{request.user.profile.full_name}}</p>
+                      <p><span>Full Name </span><input type="text" name="" value="{{request.user.username}}" disabled id=""></p>
                   </div>
                   <div class="bio-row">
-                      <p><span>User Name </span>: {{request.user.username}}</p>
+                      <p><span>User Name </span><input type="text" name="" value="{{request.user.username}}" id=""></p>
                   </div>
                   <div class="bio-row">
                       <p><span>Country </span>: Australia</p>
@@ -35,13 +35,19 @@
                       <p><span>Occupation </span>: UI Designer</p>
                   </div>
                   <div class="bio-row">
-                      <p><span>Email </span>: {{request.user.email}}</p>
+                      <p><span>Email </span><input type="text" name="" value="{{request.user.email}}" id=""></p>
                   </div>
                   <div class="bio-row">
-                      <p><span>Mobile </span>: {{request.user.profile.phone}}</p>
+                      <p><span>Mobile </span><input type="text" name="" value="{{request.user.profile.phone}}" id=""></p>
                   </div>
                   <div class="bio-row">
-                      <p><span>Hired Status </span>: {{request.user.resume.hire_status}}</p>
+                      <p><span>Hired Status </span>
+                        <select name="hire_status" value="{{request.user.resume.hire_status}}" id="">
+                            <option value="">Hired</option>
+                            <option value="">Freelance</option>
+                            <option value="">both</option>
+                        </select>
+                     
                   </div>
               </div>
           </div>

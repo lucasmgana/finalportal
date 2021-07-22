@@ -44,12 +44,12 @@
                 
                 {% if request.user.is_authenticated %}
                     {% include 'included/sidenav.html' %}
-                    <div class="col-md-9">
+                    <div class="col-md-9 rounded">
                 {% else %}
-                <div class="col-md-12">
+                <div class="col-md-12 rounded">
                 
                 {% endif %}
-                <div class="mgana-account-page-right shadow-sm bg-white p-4 h-100">
+                <div class="mgana-account-page-right shadow-sm bg-white p-4 h-100 rounded">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade  active show" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
                             <div class="row">

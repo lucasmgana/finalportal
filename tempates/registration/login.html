@@ -8,6 +8,11 @@
 
 
 {% block content %}
+
+{% if request.GET.next %}
+    <input type="hidden" name="next" value="{{request.GET.next}}" />
+{% endif %}
+    
 <div class="row mt-3">
 <div class="col-md-4">
                     <!-- cards -->
@@ -40,13 +45,13 @@
                                         type = "text"
                                         {% endif %}                                            
                                         class="form-control" name="{{field.name}}" id=""> 
-                                        
+                                       
                                         {% if field.errors %}
-                                                {% for error in field.errors %}
-                                                <p class="text-danger">{{error}}</p>           
-                                                {% endfor %}
-                                                    
-                                        {% endif %}
+                                                    {% for error in field.errors %}
+                                                    <p class="text-danger">{{error}}</p>           
+                                                    {% endfor %}
+                                                        
+                                            {% endif %}
                                     </div>  
                                     {% endfor %}
                                     

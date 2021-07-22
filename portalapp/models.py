@@ -24,6 +24,7 @@ class Profile(models.Model):
     gender              = models.CharField(verbose_name='Gender', default="", blank= False, null= False, name="gender", max_length=255)
     date_of_birth       = models.DateField()
     phone               = models.CharField(max_length = 244)
+    bio                 = models.TextField(max_length=500, default='Hi, say something..')
 
     def __str__(self):
         return str(self.client)
@@ -31,7 +32,7 @@ class Profile(models.Model):
 
 
 class Resume(models.Model):
-    seeker              = models.OneToOneField(Profile, verbose_name= "Seeker", on_delete=models.CASCADE)
+    seeker              =  models.OneToOneField(Profile, verbose_name= "Seeker", on_delete=models.CASCADE)
     cv_attachment       =  models.CharField(max_length=50)
     education_level     =  models.CharField(max_length=50)
     certificates        =  models.CharField(max_length=50)
