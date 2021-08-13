@@ -6,34 +6,50 @@
 {% block content %}
 
 <div class="row text-primary py-2">
-    <div class="col-md">
+    <div class="col-md-8 m-auto">
             <div class="card mb-4 p-3">
     
-    <div class="list-card-image">
-        <div class="star float-right"><span class="badge badge-success"><i class="icofont-star"></i> saves 5k</span></div>
-        <strong>Vacancy: {{job.vaccancy}}</strong>
+    <div class="list-card">
+        <div class="star float-right"><span class="badge badge-pill py-2 badge-success"><i class="icofont-star"></i> saves {{job.saved}}</span></div>
+        <h3>Vacancy: <strong>{{job.position_name}}</strong></h3>
     </div><hr class="mt-2 mb-2">
 
-    <span style="color: red;"> | Posted: {{job.posted_on | timesince}}</span>  
-   <p> Posted by {{job.company.capitalize}} </p>
-   <div class="mt-4">
-       
+    <p style="font-size: 14px;" class="mb-1 text-danger">| Posted by:  {{job.creater|title}}
+    </p>
+
+    <div class="mb-4">
+        <p class="text-gray m-0 p-0"><i class="fas fa-calendar-times"></i> Posted on: {{job.posted_on|timesince}}</p>
+        <p class="text-gray m-0 p-0"><i class="fas fa-times-circle"></i> Deadline: {{job.deadline}} </a></p>
+        <p class="text-gray m-0 p-0"><span class="bg-light text-dark rounded-sm pb-1 pt-1 pr-2"><i class="text-danger fas fa-user-graduate"></i> Post(s): {{job.vacancy}} </span></p>
+        
+        <p class="text-gray m-0 p-0"><span class="bg-light text-dark rounded-sm pb-1 pt-1 pr-2">
+            <i class="text-danger fas fa-user-graduate"></i> minimun age: {{job.min_age}} Yrs
+        </span></p>
+        <p class="text-gray m-0 p-0"><span class="bg-light text-dark rounded-sm pb-1 pt-1 pr-2">
+            <i class="text-danger fas fa-user-graduate"></i> Maximum age: {{job.max_age}} Yrs
+        </span></p>
+        <p class="text-gray m-0 p-0"><span class="bg-light text-dark rounded-sm pb-1 pt-1 pr-2">
+            <i class="text-danger fas fa-cash-register"></i> Salary: Tsh. {{job.salary}} /-
+        </span></p>
+    </div>
 <h5 class="text-muted">Descriptions</h5>
-    <p>{{job.description|truncatewords:20}}</p>
-    <p>Deadline: {{job.dadeline}} </p>
-
+<div class="ml-md-2">    
+{{job.descriptions|truncatewords:20}}
 </div>
-
-<p>Available Post(s): {{job.available}} </p>
+ 
 <hr>
 <div class="btn-group m-auto">
     
     {% if request.user.is_authenticated %}
-    <a class="btn btn-sm rounded btn-info m-1" href="{% url 'portalapp:applying' job.id %}">Apply Now</a>
+    <a class="btn btn-sm rounded btn-info mx-1" href="{% url 'portalapp:applying' job.pk %}"><i class="fas fa-database"></i>&nbsp; Apply Now</a>
     {% else %}        
-    <a class="btn btn-sm rounded btn-danger m-1" href="{% url 'login' %}">Login to Apply</a>
+    <a class="btn btn-sm rounded btn-danger mx-1" href="{% url 'portalapp:applying' job.pk %}"><i class="fas fa-sign-in-alt"></i> Login to Apply</a>
     {% endif %}
-<a class="btn btn-sm rounded btn-primary m-1" href="{% url 'portalapp:catjobs' job.category %}"> save job</a>
+    <form action="{% url 'portalapp:savejob' job.pk %}" method="post">
+        {% csrf_token %}
+    <button type="submit" class="btn px-4 btn-sm btn-secondary mx-1"><i class="fas fa-save"></i> Save</button>
+</form>
+</div>
 </div>
 </div>
 </div>

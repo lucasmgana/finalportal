@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %} Application {% endblock title %}
+{% block content %}
+
+<div class="container">
+        <div class="row">   
+            <div class="col-12">    
+                <div class="card px-5"> 
+                    <h5 class="font-size24 sm-font-size22 xs-font-size20 my-4">Application Particulars</h5> 
+                    <form method="POST" enctype="multipart/form-data">  
+                        {% csrf_token %}    
+                        <div class="form-row">  
+                            <div class="form-group col-md-6">   
+                                <input type="text" required name="{{form.job_title.html_name}}" value="{{applied_job.position_name|title}}" readonly class="form-control" id="inputEmail4" placeholder="Job Title"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" required name="{{form.job_status.name}}" class="form-control" id="inputPassword4" placeholder="Job Status"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" required name="{{form.full_name.name}}" value="{{request.user.username|title}}" id="inputAddress" placeholder="Full Name"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" required name="{{form.seeker_email.name}}" value="{{request.user.email}}" id="inputAddress2" placeholder="Email"/>
+                        </div>
+                    </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" required name="{{form.seeker_phone.name}}" value="{{request.user.profile.phone}}" id="inputCity" placeholder="Phone Number"/>
+                            </div>
+                            <div class="form-group col-md-4">
+  
+                                {{applied_job.experience}}
+                                   
+                            </div>
+                            <div class="form-group pl-4 col-md-4 d-flex">
+                                <label for="id_seeker_cv">cv</label>
+                                <input type="file" accept=".docx, .pdf" class="form-control" id="id_seeker_cv" name="{{form.seeker_cv.name}}" aria-describedby="filecheck" required/>
+                               
+                                <small id="filecheck" class="text-danger ml-3"></small>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i> Submit Application</button>
+                            <a role="button" type="button" class="btn btn-danger text-decoration-none text-white"><i class="fas fa-times-circle"></i> Cancel Application</a>
+                        </div>  
+                    </form> 
+                </div>  
+            </div>  
+        </div>  
+</div>  
+
+<script>
+    var file = document.getElementById('id_seeker_cv');
+    file.onchange = function(e){
+        var ext = this.value.match(/\.([^\.]+)$/)[1];
+        switch(ext){
+            case 'docs':
+            case 'pdf':
+            break;
+
+            default:
+                document.getElementById('filecheck').innerHTML = 'Unsupported file format';
+                this.value = '';
+        }        
+    }
+
+</script>
+{% endblock content %}

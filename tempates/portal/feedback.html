@@ -3,17 +3,38 @@
 
 
 {% block title %} Feedback {% endblock title %}
-
-
-
 {% block content %}
 
-{% block breadcrumb_link %}
-           {{cat_title}}
-{% endblock breadcrumb_link %}
-
-<h1>FEEDBACK PAGE</h1>
-
-
-
+<div class="container px-5">
+    <form action="" class="form mx-5 pt-md-4 pr-md-5" method="post">
+        {% csrf_token %}
+    <div class="row">
+        <div class="col">
+                <div class="form-group">
+                  <textarea type="text" rows="4" name="email" id="email" class="form-control" placeholder="your feedbacks ..." aria-describedby="helpId"></textarea>
+                </div>
+            </div>
+        </div>
+    <div class="row mt-2 mb-4">
+        <div class="col-md-6">
+            <input required type="email" value="{{request.user.email}}" placeholder="i.e. lukamgana@gamil.com" class="form-control is-valid" name="email" id="email">
+            <div class="invalid-feedback">
+                Validation message
+            </div>
+            </div>
+            <div class="col-md-6">
+                <input type="tel" value="{{request.user.email}}" placeholder="i.e. 07xxxxxxx [optional]" class="form-control is-valid" name="email" id="email">
+                <div class="invalid-feedback">
+                    Validation message
+                </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="btn-group d-flex text-white ml-3">
+                <button type="submit" class="btn btn-sm mr-1 rounded btn-info">Send Feedback</button>
+                <button type="reset" class="btn btn-sm mr-1 rounded btn-danger">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock content %}

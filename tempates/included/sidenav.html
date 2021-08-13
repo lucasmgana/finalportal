@@ -1,41 +1,44 @@
 
-<div id="desk" class="profile-nav col-md-3">
-    <div class="panel">
-        <div class="user-heading round bg-info">
+<div id="desk" class="profile-nav mt-0 col-md-2">
+    <div style="position: fixed;" class="panel">
+        <div class="user-heading pt-2 pb-1 round bg-info">
             <a>
-                <img src="
+                <img width="100%" src="
                 
-                {% if request.user.profile.profile_image %}
-                {{request.user.profile.profile_image.url}}
+                {% if request.user.seeker.profile_image %}
+                {{request.user.seeker.profile_image.url}}
                 {% else %}
-                https://bootdey.com/img/Content/avatar/avatar3.png
+                ../../static/avater.jpeg
                 {% endif %}
                 
                 " alt="">
             </a>
-            <h1 class="mt-4 text-white" style="font-weight: bold;">{{request.user.username.capitalize}}</h1>
-            <span class="text-white-75">{{request.user.email}}</span>
+            <h5 class="mt-3 text-white" style="font-weight: bold;">{{request.user.username.capitalize}}</h5>
+            <p class="text-white-75 m-0 p-0">{{request.user.email}}</p>
+            
+            
+            {% if comp %}
+            <p class='text-white-50'>Competeness <strong>{{comp}}</strong></p>
+            {% endif %}        
         </div>
 
-        <ul class="nav nav-vertical nav-stacked bg-secondary rounded-bottom mt-0 px-3 py-2">
+        <ul class="nav nav-vertical nav-stacked bg-secondary rounded-bottom">
             <nav class="nav flex-column">
-            <li><a class="nav-link text-white" class="nav-link text-white" href="{% url 'clients:profile' request.user.id %}"> <i class="icofont-ui-user text-white mr-2" ></i> Profile</a></li>
-               
-            <li><a class="nav-link text-white" href="#"> <i class="icofont-prescription  text-white mr-2" ></i> Saved job(s) <span class="badge badge-danger">9</span></a></li>
-               
-                
-            <li>
-                <a class="nav-link text-white" href="#"> <i class="icofont-ui-calendar text-white mr-2" ></i> My Calender</a>
-            </li>
-            <li>
-                <a class="nav-link text-white" href="#"> <i class="icofont-ui-office  text-white mr-2" ></i> My applications</a>
-            </li>
-            <li>
-                <a class="nav-link text-white" href="#"> <i class="icofont-ui-file  text-white mr-2" ></i> Update resumes</a>
-            </li>
-            <li>
-                <a class="nav-link text-white" class="nav-link text-white" href="{% url 'clients:editprofile' %}"> <i class="icofont-ui-edit  text-white mr-2" ></i> Edit profile</a>
-            </li>
+            <li><a class="nav-link py-2 text-white" href="{% url 'portalapp:my-dashboard' %}"> <i class="icofont-lg icofont-dashboard  text-warning mr-2" ></i>&nbsp;Dashboard</a></li>
+            <li><a class="nav-link py-2 text-white" class="nav-link text-white" href="{% url 'clients:profile' request.user.pk %}"> <i class="icofont icofont-md icofont-ui-user text-white mr-2" ></i> My Profile</a></li>
+            <li><a class="nav-link py-2 text-white" class="nav-link text-white" href="{% url 'clients:editprofile' %}"> <i class="icofont icofont-md icofont-edit  text-white mr-2" ></i> Edit profile</a></li>
+            
+            {% if request.user.is_staff %}
+            <li><a class="nav-link py-2 text-white" href="#"> <i class="icofont icofont-lg icofont-eye  text-white mr-2" ></i> View Applications</a></li>
+            <li><a class="nav-link py-2 text-white" href="/admin/"> <i class="icofont icofont-lg icofont-gear  text-white mr-2" ></i> Administration Area</a></li>
+            {% else %}
+
+            <li><a class="nav-link py-2 text-white" href="{% url 'portalapp:my-saves' %}"> <i class="icofont icofont-md icofont-save  text-white mr-2" ></i> Saved job(s) <span class="badge badge-danger">{{total_saved_jobs}}</span></a></li>
+            <li><a class="nav-link py-2 text-white" href="#"> <i class="fa fa-file fa-lg  text-white mr-2" ></i> My resumes</a></li>
+            <li><a class="nav-link py-2 text-white" href="#"> <i class="fas fa-file-archive fa-lg  text-white mr-2" ></i> Update resumes</a></li>
+            <li><a class="nav-link py-2 text-white" href="{% url 'clients:change-password' %}"> <i class="fas fa-cog fa-lg  text-white mr-2" ></i> Change Password</a></li>
+            {% endif %}
+        
         </nav>
     </ul>
     </div>

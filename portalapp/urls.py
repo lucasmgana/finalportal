@@ -1,7 +1,5 @@
 from django.urls import path
 from .views import *
-
-
 app_name = "portalapp"
 
 urlpatterns = [
@@ -10,12 +8,13 @@ urlpatterns = [
     path('categories/', CategoryView.as_view(), name = 'categories'),
     path('catetory/<str:cat>/', SpecificCategory.as_view(), name = 'catjobs'),
     path('job/<int:pk>/', SingleJob.as_view(), name = 'singlejob'),
-    path('wishlist/', Wishlist.as_view(), name = 'wishlist'),
-    path('savejob-<int:pk>/', SaveJob.as_view(), name = 'savejob'),
-
+    
     path('profile-<int:pk>/', ProfileView.as_view(), name = 'profile'),
     path('applying-<int:pk>/', ApplicationView.as_view(), name = 'applying'),
 
-    # path('myview/', myview, name = 'myview'),
-    
+    path('my-dashboard/', MyApplicationsView.as_view(), name = 'my-dashboard'),
+    path('my-dashboard/<str:status>/', FilterView.as_view(), name = 'my-dashboard'),
+    path('save-job/<int:pk>/', SaveJobView, name='savejob'),
+
+    path('my-saves/', MySaveView.as_view(), name = 'my-saves'),
 ]

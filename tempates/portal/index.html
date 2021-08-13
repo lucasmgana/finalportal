@@ -18,35 +18,44 @@
 
     <!-- viewing categorize jobs -->  
                 <!-- viewing all jobs -->
-                <div class="row">
-                    
+                <div class="row justify-content-center">
                     {% for job in jobs %}
                     <div class="col-md-4 col-sm-6 mb-4 pb-2">
-                        <div class="list-card bg-white h-100 rounded p-2 overflow-hidden position-relative shadow-lg">
+                        <div class="bg-white h-100 rounded p-2 overflow-hidden position-relative shadow-lg">
                         
                            
                            {% if cat %}
                            {{empty}}
                            {% else %}
-                           <div class="list-card-image"  style="opacity: 0.7;">
-                            <div class="member-plan p-1"><span class="btn btn-sm btn-outline-info"><a class="text-primary m-2" href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a></span></div>
-                            <a href="#">
-                            </a>
+                           <div class="list-card"  style="opacity: 0.7;">
+                            <div class="float-right"><p class="badge badge-success badge-pill mt-2 py-1 mr-2"><i class="icofont-star"></i> saves {{job.saved}}</p></div>
+                            <div class="p-1"><a class="btn btn-sm btn-outline-primary text-decoration-none m-2" href="{% url 'portalapp:catjobs' job.category %}">{{job.category}}</a></div>
                         </div>
 
                            {% endif %}
-                               
+                           <div class='float-right '>
+                            <img class="image-fluid shadow-lg mr-3" style='border-radius: 50%;' width="100" height="100" src="../../static/freelancer.png" alt="">
+                        </div>
                             <div class="p-3 position-relative">
                                 <div class="list-card-body">
-                                    <p style="font-size: 18px;" class="mb-1 text-danger">{{job.vaccancy}}
+                                    <p style="font-size: 28px;" class="mb-1 text-danger">{{job.position_name|title}}
                                   </p>
-                                    <small class="text-gray mb-3">Posted on: {{job.posted_on|timesince}} </a></small><br>
-                                    <small class="text-gray mb-3">Deadline: {{job.dadeline}} </a></small>
-                                    <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> Post(s): {{job.available}} </span></p>
+                                  <p style="font-size: 14px;" class="mb-1 text-danger">| Posted by:  {{job.creater|title}}
+                                  </p></div>
+
+                                <div class="mt-4">
+                                    <p class="text-gray m-0 p-0"><i class="fas fa-address-card"></i> Job experience: {{job.experience}}</p>
+                                    <p class="text-gray m-0 p-0"><i class="fas fa-calendar-times"></i> Posted on: {{job.posted_on|timesince}}</p>
+                                    <p class="text-gray m-0 p-0"><i class="fas fa-times-circle"></i> Deadline: {{job.deadline}} </a></p>
+                                    <p class="text-gray m-0 p-0"><span class="bg-light text-dark rounded-sm pb-1 pt-1 pr-2"><i class="text-danger fas fa-user-graduate"></i> Post(s): {{job.vacancy}} </span></p>
                                 </div>
-                                <div class="btn-group">
-                                    <a class="btn btn-sm btn-info m-1" href="{% url 'portalapp:singlejob' job.id %}"> View Job</a>
-                                    <a class="btn btn-sm btn-primary m-1" href="{% url 'portalapp:savejob' job.id %}"> Save</a>
+
+                                <div class="row text-center justify-content-center">
+                                    <a class="btn btn-sm btn-info m-1" href="{% url 'portalapp:singlejob' job.pk %}"><i class="far fa-eye text-white"></i> View Job</a>
+                                    <form action="{% url 'portalapp:savejob' job.pk %}" method="post">
+                                        {% csrf_token %}
+                                    <button type="submit" class="btn px-4 btn-sm btn-secondary m-1"><i class="far fa-save"></i> Save</button>
+                                </form>
                                 </div>
                             </div>
 

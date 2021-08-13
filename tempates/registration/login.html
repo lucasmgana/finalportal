@@ -13,76 +13,48 @@
     <input type="hidden" name="next" value="{{request.GET.next}}" />
 {% endif %}
     
-<div class="row mt-3">
-<div class="col-md-4">
-                    <!-- cards -->
-                        <div class="list-card bg-white h-100 rounded p-2 m-0 overflow-hidden position-relative shadow-sm">
-
-                            
-                            <div class="list-card-image">
-                            
-                            <div class="p-3 position-relative">
-                                <h2 class="mt-0 mb-4">Login</h2>
-
-                                <form action="" method="post">
-                                    
-                                    {% csrf_token %}
-                                    
-                                    {% for non_field_error in form.non_field.errors %}
-                                    <p class="help is-danger">{{non_field_error}}</p> 
-                                    {% endfor %}
-                                    
-                                    {% for field in form %}
-                                    <div class="form-group p-1">
-                                    <label for="{{ field.id_for_lablel }}" class="label">{{field.html_name}}</label>
-                                    <input                                        
-                                        {% if field.name == 'password' %}
-                                            type = 'password'                                        
-                                        {% elif field.name == 'email' %}
-                                        type="email" 
-
-                                        {% else %}
-                                        type = "text"
-                                        {% endif %}                                            
-                                        class="form-control" name="{{field.name}}" id=""> 
-                                       
-                                        {% if field.errors %}
-                                                    {% for error in field.errors %}
-                                                    <p class="text-danger">{{error}}</p>           
-                                                    {% endfor %}
-                                                        
-                                            {% endif %}
-                                    </div>  
-                                    {% endfor %}
-                                    
-                                    <button class="btn btn-sm btn-info">Login</button><span class="text-info float-right">Do not have an account? <a href="{% url 'clients:register' %}">Register</a></span>
-                                </form>
-                            </div>
 
 
-                        </div>
-                    </div>
-                    <!-- end card -->                    
-</div>
+<div class="row justify-content-center" style="height: 70vh">
+    <div class="col-md-5">
+            <div class="card m-auto border-0 bg-light shadow-md">
+            
+                <form action="" method="post">                                    
+                <div class="card-header text-center">
+                    <h2 class="text-primary">Portal Login</h2>
 
+                </div>
+                    {% csrf_token %}
+                    <div class="card-body">
+                    {% if form.errors %}
+                    <small class="alert alert-danger text-center m-auto">Invalid username or password</small> 
+                    {% endif %}
+                        
+                    
+                    {% for field in form %}
+                    <div class="form-group p-1">
+                    <label for="{{ field.id_for_lablel }}" class="label">{{field.html_name}}</label>
+                    <input                                        
+                        {% if field.name == 'password' %}
+                            type = 'password'                                        
+                        {% elif field.name == 'email' %}
+                        type="email" 
 
-    <div class="col-md-8">
-        <div class="mgana-account-page-left shadow-sm bg-white h-100">
-            <div class="border-bottom p-4">
-                <h2>Nothing about here</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quaerat eius pariatur eum vitae. Laborum delectus, possimus, 
-                    beatae sint optio aperiam nisi hic non deleniti quidem laudantium maxime ipsum omnis iste natus, veritatis architecto vel 
-                    incidunt perferendis placeat ipsam nihil animi quibusdam! Temporibus dignissimos debitis sapiente nihil voluptates repellendus enim.</p>
-            </div>
-            <ul class="nav nav-tabs flex-column border-0 pt-4 pl-4 pb-4" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false"><i class="icofont-heart"></i> Explore Jobs</a>
-                </li>
-            </ul>
+                        {% else %}
+                        type = "text"
+                        {% endif %}                                            
+                        class="form-control" name="{{field.name}}" id=""> 
+                        
+                    </div>  
+                    {% endfor %}
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-info px-4"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login</button>
+                    <p class="text-info float-right mr-2 mt-2">Do not have an account? <a href="{% url 'clients:register' %}">&nbsp;Register</a></p>
+                </div>
+                </form>
         </div>
-    </div>
-
-
-</div>
+                    <!-- end card -->                    
+</div></div>
 
 {% endblock content %}

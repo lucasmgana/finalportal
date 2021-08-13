@@ -7,8 +7,12 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+        <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
+       
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+        <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome.css' %}">
         <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'bstyles/icofont/icofont.min.css' %}">
     
@@ -19,10 +23,10 @@
         
         <!-- material for bootstrap -->
         <link rel="stylesheet" href="{% static 'bstyles/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'portalstyles/css/sidenav.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'portalstyles/css/sidenav.css' %}"> -->
         
-        <link rel="stylesheet" href="{% static 'portalstyles/css/profile.css' %}">
-        <link rel="stylesheet" href="{% static 'portalstyles/css/edit_profile.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'portalstyles/css/profile.css' %}"> -->
+        <!-- <link rel="stylesheet" href="{% static 'portalstyles/css/edit_profile.css' %}"> -->
         <link rel="stylesheet" href="{% static 'portalstyles/css/myprofile.css' %}">
         
         <!-- this page title -->
@@ -34,28 +38,45 @@
             
         </title>
     </head>
-    <body>
+    <body onclick="msghidder()">
         
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-    <div class="container" style="margin-top: 0em;">       
-        {% include 'included/navbar.html' %}
-        
+    {% if request.user.is_authenticated %}
+    <div class="container-fluid">  
+        {% else %}     
+        <div class="container">  
+            {% endif %}
+            {% include 'included/navbar.html' %}
         <div class="row pt-4">
                 
                 {% if request.user.is_authenticated %}
                     {% include 'included/sidenav.html' %}
-                    <div class="col-md-9 rounded">
+                    
+                    <div class="col-md-10 pr-md-5 rounded">
                 {% else %}
                 <div class="col-md-12 rounded">
-                
                 {% endif %}
+                    
                 <div class="mgana-account-page-right shadow-sm bg-white p-4 h-100 rounded">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade  active show" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
                             <div class="row">
                                 <div class="col">
-                {% include 'included/breadcrumb.html' %} 
+                                    {% include 'included/breadcrumb.html' %} 
                                 </div>
+
+                                {% if messages %}
+                                {% for message in messages %}
+                                <div id="msg" class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>hey! </strong> {{message}}
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+
                                 <div class="col">
                                     {% block searchbar %}
 
@@ -70,6 +91,12 @@
     </div>
 </div>
 </div>
+    <script>
+        function msghidder(){
+            document.getElementById('msg').hidden = true;
+            document.getElementById('msg').innerHTML = '';
+        };
+    </script>
      <!-- SCRIPTS -->
      <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
      
@@ -81,6 +108,11 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Popper.js -->
     <script type="text/javascript" src="{% static 'bstyles/js/popper.min.js' %}"></script>
+
+    
+    <!--font awesome -->
+    <script type="text/javascript" src="{% static 'fontawesome/js/fontawesome.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fontawesome/js/fontawesome.js' %}"></script>
 
     <!-- Bootstrap -->
     <script type="text/javascript" src="{% static 'bstyles/js/bootstrap.min.js' %}"></script>

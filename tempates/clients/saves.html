@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Dasboard {% endblock title %}
+
+{% block content %}
+
+<div class="row my-4 mx-auto">
+<table class="table">
+    <thead>
+        <tr>
+            <th>s/n</th>
+            <th>JOB TITLE</th>
+            <th>JOB PROVIDER</th>
+            <th>SAVED AT</th>
+            <th>STATUS</th>
+            <th>ACTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if saved_jobs %}
+        {% for saved_job in saved_jobs %}
+        <tr>
+            <td scope="row">{{forloop.counter}}</td>
+            <td>{{saved_job.job.position_name|title}}</td>
+            <td>{{saved_job.job.creater|title}}</td>
+            <td>{{saved_job.saved_at}}</td>
+            <td>{{saved_job.able_to_apply|title}}</td>
+            <td>  
+                <div class="d-flex">            
+                <a href="{% url 'portalapp:applying' saved_job.job.pk %}" class="text-white badge mx-1 p-2 badge-info"><i class=" text-danger icofont-database"></i> Apply</a>
+                <form action="{% url 'portalapp:savejob' saved_job.pk %}" method="post">
+                    {% csrf_token %}
+                <button type="submit" class="text-white btn btn-sm badge mx-1 p-2 badge-secondary"><i class=" text-warning icofont-eye-alt"></i> Unsave</button>
+                </form>  
+            </div>               
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr><td colspan=6 class="pt-5 pb-0 text-center text-warning" >no record(s) found</td></tr>
+        {% endif %}
+    </tbody>
+</table>
+</div>
+    
+{% endblock content %}

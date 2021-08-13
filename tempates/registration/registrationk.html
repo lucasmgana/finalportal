@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="card bg-light rounded m-auto shadow-lg border-0">
+    <form class="" action="" method="post">
+      {% csrf_token %}
+        {{form.as_p}}
+        <div class="card-footer">
+            <button class='ml-4 btn btn-sm btn-success'><i class="fas fa-user-plus"></i> Register</button>
+           <p class="float-right mr-4">Have an account?<a href="{% url 'login' %}"> Login</a> </p> 
+        </div>
+    </form>
+</div>
+</div>
+
+{% endblock content %}

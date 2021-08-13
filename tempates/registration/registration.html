@@ -28,9 +28,11 @@
                                             <p class="help is-danger">{{non_field_error}}</p> 
                                             {% endfor %}
                                             {% for field in form %}
+                                            <div class="row d-flex">
+                                                <div class="col">
                                             <div class="form-group p-1">
                                                 
-                                            <label for="{{ field.name }}" class="label text-info">{{field.html_name}}</label>
+                                            <label for="{{ field.name }}" class="label text-info">{{field.label}}</label>
                                             
                                             {{field}}
                                             
@@ -42,7 +44,8 @@
                                                         
                                             {% endif %}
                                         </div>
-                                                    
+                                    </div>
+                                    </div>
                                             {% endfor %}
                                         <button class="btn btn-sm btn-info">Register</button><span class="text-info float-right"> Do you have an account? <a href="{% url 'login' %}">Login</a></span>
                                         
@@ -64,7 +67,7 @@
                     {% for field in form %}
                     
                     {% if field.help_text %}                            
-                    <span>{{field.html_name}}</span>
+                    <span>{{field.label}}</span>
                         <p>{{field.help_text}}</p>
                     {% endif %}
                     {% endfor %}
@@ -72,7 +75,7 @@
             </div>
             <ul class="nav nav-tabs flex-column border-0 pt-4 pl-4 pb-4" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false"><i class="icofont-heart"></i> Explore Jobs</a>
+                    <a class="nav-link" id="favourites-tab" data-toggle="tab" href="{% url 'portalapp:index' %}" role="tab" aria-controls="favourites" aria-selected="false"><i class="icofont-heart"></i> Explore Jobs</a>
                 </li>
             </ul>
         </div>

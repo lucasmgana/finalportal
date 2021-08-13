@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-4xpz#kw$+(eq%v6x4ak&9(9fl29=-7r96d!tuwsx3i0u(b*o%d
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['192.168.8.2']
 
 
 # Application definition
@@ -37,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # apps for job portal project
     'portalapp',
     'clients',
-    'jobapplication',
+    'import_export',
+    'jobs',
 ]
 
 MIDDLEWARE = [
@@ -78,12 +82,15 @@ WSGI_APPLICATION = 'finalportal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'job_portal',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR/ 'portal_db.sqlite3',
+
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'job_portal',
+        # 'HOST': 'localhost',
+        # 'USER': 'root',
+        # 'PASSWORD': '',
+        # 'PORT': '3306',
     }
 }
 

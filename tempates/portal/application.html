@@ -1,136 +1,80 @@
 {% extends 'base.html' %}
-
-{% block title %} category {% endblock title %}
-
-
+{% block title %} Application {% endblock title %}
 {% block content %}
 
 <div class="container">
-        <div class="row">
-
-            <div class="col-12">
-                <div class="team-single-text padding-50px-left sm-no-padding-left">
-                    <!-- <div class="contact-info-section margin-40px-tb">
-                        <ul class="list-style9 no-margin">
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-graduation-cap text-orange"></i>
-                                        <strong class="margin-10px-left text-orange">Degree:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>Master's Degrees</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="far fa-gem text-yellow"></i>
-                                        <strong class="margin-10px-left text-yellow">Exp.:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>4 Year in Education</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="far fa-file text-lightred"></i>
-                                        <strong class="margin-10px-left text-lightred">Courses:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>Design Category</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Address:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>Regina ST, London, SK.</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-mobile-alt text-purple"></i>
-                                        <strong class="margin-10px-left xs-margin-four-left text-purple">Phone:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>(+44) 123 456 789</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-envelope text-pink"></i>
-                                        <strong class="margin-10px-left xs-margin-four-left text-pink">Email:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p><a href="javascript:void(0)">addyour@emailhere</a></p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div> -->
-
-                    <h5 class="font-size24 sm-font-size22 xs-font-size20 my-4">Application Particulars</h5>
-
-
-
-
-                    <form method="POST">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Job Title"/>
+        <div class="row justify-content-center">   
+            <div class="card shadow-sm border-0 rounded">
+                <form method="POST" enctype="multipart/form-data">  
+                    
+                    <div class="card-header">
+                        <h5 class="text-center">Application Particulars</h5> 
+                    </div>    
+                    <div class="card-body"> 
+                        {% csrf_token %}    
+                        <div class="form-row">  
+                            <div class="form-group col-md-6">   
+                                <label for="exp">Job title</label>
+                                <input type="text" required name="{{form.job_title.html_name}}" value="{{applied_job.position_name|title}}" readonly class="form-control" id="inputEmail4" placeholder="Job Title"/>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control" id="inputPassword4" placeholder="Job Status"/>
+                                <label for="exp">Experience</label>
+                                <input type="text" readonly required value="{{applied_job.experience}}" name="{{form.job_status.name}}" class="form-control" id="exp" placeholder="Job Status"/>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="inputAddress" placeholder="Full Name"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Email"/>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <input type="number" class="form-control" id="inputCity" placeholder="Phone Number"/>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <input type="number" class="form-control" id="inputCity11" placeholder="Experience (Years)"/>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputCitqy" class="form-control icofont-upload"><span class="ml-3">Upload CV</span></label>
-                                <input type="file" class="form-control" id="inputCitqy" name="CV" style="display: none;" placeholder="CV"/>
-                            </div>
+                        <div class="form-group col-md-6">
+                                <label for="exp">Full name</label>
+                                <input type="text" class="form-control" required name="{{form.full_name.name}}" value="{{request.user.username|title}}" id="inputAddress" placeholder="Full Name"/>
                         </div>
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary">Submit Application</button>
-                            <button type="submit" class="btn btn-danger">Cancel Application</button>
+                        <div class="form-group col-md-6">
+                                <label for="exp">Email</label>
+                                <input type="email" class="form-control" required name="{{form.seeker_email.name}}" value="{{request.user.email}}" id="inputAddress2" placeholder="Email"/>
                         </div>
-                    </form>
+                    </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="exp">Phone</label>
+                                <input type="number" class="form-control" required name="{{form.seeker_phone.name}}" value="{{request.user.profile.phone}}" id="inputCity" placeholder="Phone Number"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="exp">Experience</label>
+                                <input type="number" class="form-control" required name="{{form.seeker_job_experience.name}}" id="inputCity11" placeholder="Experience (Years)"/>
+                            </div>
+                            <div class="form-group pl-4 col-md-4">
+                                <label for="id_seeker_cv">Upload CV</label>
+                                <input type="file" accept=".docx, .pdf" class="form-control ml-3" id="id_seeker_cv" name="{{form.seeker_cv.name}}" aria-describedby="filecheck" required/>
+                                <small id="filecheck" class="text-danger ml-3"></small>
+                            </div>
+                            
+                        </div>
+                       
+                    </div>  
+                    <div class="card-footer">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i> Submit Application</button>
+                            <a role="button" type="button" class="btn btn-danger text-decoration-none text-white"><i class="fas fa-times-circle"></i> Cancel Application</a>
+                        </div> 
+                    </div> 
+                    </form> 
+            </div> 
+        </div>  
+</div>  
 
-                </div>
-            </div>
-        </div>
-</div>    
+<script>
+    var file = document.getElementById('id_seeker_cv');
+    file.onchange = function(e){
+        var ext = this.value.match(/\.([^\.]+)$/)[1];
+        switch(ext){
+            case 'docs':
+            case 'pdf':
+            break;
+
+            default:
+                document.getElementById('filecheck').innerHTML = 'Unsupported file format';
+                this.value = '';
+        }        
+    }
+
+</script>
 {% endblock content %}

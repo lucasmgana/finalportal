@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %} Dasboard {% endblock title %}
+
+{% block content %}
+
+<div class="row text-white my-4 text-center">
+<div class="col-md-3">
+    <a href="{% url 'portalapp:my-dashboard' %}" class="card text-white text-decoration-none border-0 shadow-sm bg-info p-3">
+        <i class=""></i>
+         <i  class="icofont-3x icofont-ui-office my-1"></i>
+         <h4>{{total_applied}}</h4>
+     <span>Total</span> 
+    </a>
+</div>
+<div class="col">
+    <a href="{% url 'portalapp:my-dashboard' 'accepted' %}" class="card text-white text-decoration-none border-0 shadow-sm bg-success p-3">
+        <i  class="icofont-3x icofont-thumbs-up my-1"></i>
+        <h4>{{accepted}}</h4>
+    <span>Accepted</span> 
+    </a>
+</div>
+<div class="col">
+    <a href="{% url 'portalapp:my-dashboard' 'rejected' %}" class="card text-white text-decoration-none border-0 shadow-sm bg-danger p-3">
+        <i  class="icofont-3x icofont-thumbs-down my-1"></i>
+        <h4>{{rejected}}</h4>
+    <span>Rejected</span> 
+    </a>
+</div>
+<div class="col">
+    <a href="{% url 'portalapp:my-dashboard' 'pending' %}" class="card text-white text-decoration-none border-0 shadow-sm bg-warning p-3">
+            <i  class="icofont-3x icofont-spinner-alt-2 my-1"></i>
+            <h4>{{pending}}</h4>
+        <span>Pending</span> 
+    </a>
+</div>
+</div>
+<div class="row my-4 mx-auto">
+<table class="table">
+    <thead>
+        <tr>
+            <th>s/n</th>
+            <th>JOB TITLE</th>
+            <th>JOB PROVIDER</th>
+            <th>APPLIED AT</th>
+            <th>STATUS</th>
+            <th>ACTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if applications %}
+        {% for application in applications %}
+        <tr>
+            <td scope="row">{{forloop.counter}}</td>
+            <td>{{application.job_title|title}}</td>
+            <td>{{application.job_provider|title}}</td>
+            <td>{{application.application_date}}</td>
+            <td>{{application.application_status|title}}</td>
+            <td>
+                
+                <a class=" text-white badge p-2 badge-info"><i class=" text-danger icofont-magnet"></i> Track</a>
+                
+                <a class=" text-white badge p-2 badge-secondary"><i class=" text-warning icofont-eye-alt"></i> view letter</a>
+                
+                </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr><td colspan=6 class="pt-5 pb-0 text-center text-warning" >no record(s) found</td></tr>
+        {% endif %}
+    </tbody>
+</table>
+</div>
+    
+{% endblock content %}
